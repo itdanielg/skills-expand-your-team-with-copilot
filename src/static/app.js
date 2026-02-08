@@ -1,4 +1,36 @@
+// Theme icon constants
+const THEME_ICONS = {
+  LIGHT: "🌙", // Moon icon for light mode (click to go dark)
+  DARK: "☀️"   // Sun icon for dark mode (click to go light)
+};
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Dark mode functionality
+  const themeToggle = document.getElementById("theme-toggle");
+  const themeIcon = document.getElementById("theme-icon");
+
+  // Only initialize dark mode if elements exist
+  if (themeToggle && themeIcon) {
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark-mode");
+      themeIcon.textContent = THEME_ICONS.DARK;
+    }
+
+    // Toggle dark mode
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      const isDarkMode = document.body.classList.contains("dark-mode");
+      
+      // Update icon
+      themeIcon.textContent = isDarkMode ? THEME_ICONS.DARK : THEME_ICONS.LIGHT;
+      
+      // Save preference
+      localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+    });
+  }
+
   // DOM elements
   const activitiesList = document.getElementById("activities-list");
   const messageDiv = document.getElementById("message");
