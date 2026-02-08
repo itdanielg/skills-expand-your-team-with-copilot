@@ -1,3 +1,9 @@
+// Theme icon constants
+const THEME_ICONS = {
+  LIGHT: "🌙", // Moon icon for light mode (click to go dark)
+  DARK: "☀️"   // Sun icon for dark mode (click to go light)
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   // Dark mode functionality
   const themeToggle = document.getElementById("theme-toggle");
@@ -9,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
       document.body.classList.add("dark-mode");
-      themeIcon.textContent = "☀️";
+      themeIcon.textContent = THEME_ICONS.DARK;
     }
 
     // Toggle dark mode
@@ -18,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const isDarkMode = document.body.classList.contains("dark-mode");
       
       // Update icon
-      themeIcon.textContent = isDarkMode ? "☀️" : "🌙";
+      themeIcon.textContent = isDarkMode ? THEME_ICONS.DARK : THEME_ICONS.LIGHT;
       
       // Save preference
       localStorage.setItem("theme", isDarkMode ? "dark" : "light");
