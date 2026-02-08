@@ -340,7 +340,7 @@ section h3 {
 }
 
 .share-whatsapp:hover .share-icon {
-  filter: grayscale(1) brightness(2);
+  color: white;
 }
 
 .share-email {
