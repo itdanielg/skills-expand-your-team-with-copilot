@@ -554,16 +554,16 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
       <div class="social-share">
         <span class="share-label">Share:</span>
-        <button class="share-button share-twitter" title="Share on Twitter">
+        <button class="share-button share-twitter" title="Share on Twitter" aria-label="Share on Twitter">
           <span class="share-icon">𝕏</span>
         </button>
-        <button class="share-button share-facebook" title="Share on Facebook">
+        <button class="share-button share-facebook" title="Share on Facebook" aria-label="Share on Facebook">
           <span class="share-icon">f</span>
         </button>
-        <button class="share-button share-whatsapp" title="Share on WhatsApp">
+        <button class="share-button share-whatsapp" title="Share on WhatsApp" aria-label="Share on WhatsApp">
           <span class="share-icon">💬</span>
         </button>
-        <button class="share-button share-email" title="Share via Email">
+        <button class="share-button share-email" title="Share via Email" aria-label="Share via Email">
           <span class="share-icon">✉</span>
         </button>
       </div>
@@ -622,18 +622,16 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     const shareTitle = encodeURIComponent(`${activityName} - Mergington High School`);
     
-    let shareUrl = "";
-    
     // Determine which platform to share to
     if (button.classList.contains("share-twitter")) {
-      shareUrl = `https://twitter.com/intent/tweet?text=${shareText}&url=${pageUrl}`;
-      window.open(shareUrl, "_blank", "width=600,height=400");
+      const shareUrl = `https://twitter.com/intent/tweet?text=${shareText}&url=${pageUrl}`;
+      window.open(shareUrl, "_blank", "width=600,height=400,noopener,noreferrer");
     } else if (button.classList.contains("share-facebook")) {
-      shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}&quote=${shareText}`;
-      window.open(shareUrl, "_blank", "width=600,height=400");
+      const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}&quote=${shareText}`;
+      window.open(shareUrl, "_blank", "width=600,height=400,noopener,noreferrer");
     } else if (button.classList.contains("share-whatsapp")) {
-      shareUrl = `https://wa.me/?text=${shareText}%20${pageUrl}`;
-      window.open(shareUrl, "_blank", "width=600,height=400");
+      const shareUrl = `https://wa.me/?text=${shareText}%20${pageUrl}`;
+      window.open(shareUrl, "_blank", "width=600,height=400,noopener,noreferrer");
     } else if (button.classList.contains("share-email")) {
       const subject = shareTitle;
       const body = encodeURIComponent(
