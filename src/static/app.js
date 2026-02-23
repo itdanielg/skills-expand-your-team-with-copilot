@@ -614,6 +614,21 @@ document.addEventListener("DOMContentLoaded", () => {
             .join("")}
         </ul>
       </div>
+      <div class="social-share">
+        <span class="share-label">Share:</span>
+        <button class="share-button share-twitter" title="Share on Twitter" aria-label="Share on Twitter">
+          <span class="share-icon">𝕏</span>
+        </button>
+        <button class="share-button share-facebook" title="Share on Facebook" aria-label="Share on Facebook">
+          <span class="share-icon">f</span>
+        </button>
+        <button class="share-button share-whatsapp" title="Share on WhatsApp" aria-label="Share on WhatsApp">
+          <span class="share-icon">💬</span>
+        </button>
+        <button class="share-button share-email" title="Share via Email" aria-label="Share via Email">
+          <span class="share-icon">✉</span>
+        </button>
+      </div>
       <div class="activity-card-actions">
         ${
           currentUser
@@ -649,7 +664,43 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
+    // Add click handlers for social share buttons
+    const shareButtons = activityCard.querySelectorAll(".share-button");
+    shareButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        handleShareClick(button, name, formattedSchedule, details.description);
+      });
+    });
+
     activitiesList.appendChild(activityCard);
+  }
+
+  // Handle social share button clicks
+  function handleShareClick(button, activityName, schedule, description) {
+    // Build the share text and URL
+    const pageUrl = encodeURIComponent(window.location.href);
+    const shareText = encodeURIComponent(
+      `Check out ${activityName} at Mergington High School! ${description} Schedule: ${schedule}`
+    );
+    const shareTitle = encodeURIComponent(`${activityName} - Mergington High School`);
+    
+    // Determine which platform to share to
+    if (button.classList.contains("share-twitter")) {
+      const shareUrl = `https://twitter.com/intent/tweet?text=${shareText}&url=${pageUrl}`;
+      window.open(shareUrl, "_blank", "width=600,height=400,noopener,noreferrer");
+    } else if (button.classList.contains("share-facebook")) {
+      const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}&quote=${shareText}`;
+      window.open(shareUrl, "_blank", "width=600,height=400,noopener,noreferrer");
+    } else if (button.classList.contains("share-whatsapp")) {
+      const shareUrl = `https://wa.me/?text=${shareText}%20${pageUrl}`;
+      window.open(shareUrl, "_blank", "width=600,height=400,noopener,noreferrer");
+    } else if (button.classList.contains("share-email")) {
+      const subject = shareTitle;
+      const body = encodeURIComponent(
+        `I thought you might be interested in this activity:\n\n${activityName}\n\n${description}\n\nSchedule: ${schedule}\n\nLearn more: ${decodeURIComponent(pageUrl)}`
+      );
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    }
   }
 
   // Event listeners for search and filter
